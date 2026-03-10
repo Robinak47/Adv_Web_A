@@ -22,7 +22,7 @@ import { UpdateUserPartiallyDto } from './dto/update-user-partially.dto';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
   @Get()
-  getUSers(): string {
+  getUSers(): string | undefined {
     return this.usersService.getAllUsers();
   }
 
@@ -47,12 +47,8 @@ export class UsersController {
   }
 
   @Get(':id')
-  public searchUser(
-    @Param() getUserById: GetUserByIdDto,
-    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
-  ): string {
-    console.log('type of id is ', typeof getUserById.id);
-    return `Searching for user with id: ${getUserById.id} and limit: ${limit}`;
+  public searchUser(@Param('id') id: string): object | undefined {
+    return this.usersService.getUserById(id);
   }
 
   @Patch(':id')
