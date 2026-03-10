@@ -8,7 +8,6 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
-import { Transform } from 'class-transformer';
 
 export class CreateUserDto {
   @IsString()
@@ -19,7 +18,6 @@ export class CreateUserDto {
   @IsEmail()
   email: string;
   @IsInt()
-  @Transform(({ value }) => parseInt(value, 10))
   age: number;
   @Matches(
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/,
